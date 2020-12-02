@@ -5,7 +5,7 @@ import { capture } from "./regex";
 describe("regex/capture", () => {
   it("extracts values from one capturing group", () => {
     const captures = capture(/^!(?<foo>\d+)!$/, "!322!", {
-      foo: s => parseInt(s),
+      foo: (s) => parseInt(s),
     });
 
     expect(captures).to.have.keys(["foo"]);
@@ -14,8 +14,8 @@ describe("regex/capture", () => {
 
   it("extracts values from multiple capturing group", () => {
     const captures = capture(/^!(?<foo>\d+)!(?<bar>[\.\d]+)!$/, "!322!1.25!", {
-      foo: s => parseInt(s),
-      bar: s => parseFloat(s),
+      foo: (s) => parseInt(s),
+      bar: (s) => parseFloat(s),
     });
 
     expect(captures).to.have.keys(["foo", "bar"]);

@@ -83,7 +83,7 @@ export class Node<T> {
     visitor: (node: Node<T>) => void,
     mode: "breadth-first" | "depth-first" = "depth-first",
   ): void {
-    this.search(node => {
+    this.search((node) => {
       visitor(node);
       return false;
     }, mode);
@@ -161,7 +161,7 @@ export class Tree<T> {
     }
 
     const children = graph.values();
-    const roots = Array.from(graph.keys()).filter(node => !children.has(node));
+    const roots = Array.from(graph.keys()).filter((node) => !children.has(node));
     if (roots.length === 0) throw new Error("no root node");
     if (roots.length > 1) throw new Error("mulitple root nodes");
 

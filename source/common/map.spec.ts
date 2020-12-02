@@ -17,12 +17,12 @@ describe("map/computeIfAbsent", () => {
 describe("map/computeIfPresent", () => {
   it("computes a value if present", () => {
     const map = new Map<number, string>([[1, "A"]]);
-    expect(computeIfPresent(map, 1, v => v + "B")).to.eq("AB");
+    expect(computeIfPresent(map, 1, (v) => v + "B")).to.eq("AB");
   });
 
   it("returns null if absent", () => {
     const map = new Map<number, string>();
-    expect(computeIfPresent(map, 1, v => v + "B")).to.eq(null);
+    expect(computeIfPresent(map, 1, (v) => v + "B")).to.eq(null);
   });
 });
 
@@ -38,11 +38,11 @@ describe("map/count", () => {
 describe("map/merge", () => {
   it("merges the current and initial values if present", () => {
     const map = new Map<number, string>([[1, "A"]]);
-    expect(merge(map, 1, "A", v => v + "B")).to.eq("AB");
+    expect(merge(map, 1, "A", (v) => v + "B")).to.eq("AB");
   });
 
   it("uses the initial value if absent", () => {
     const map = new Map<number, string>();
-    expect(merge(map, 1, "A", v => v + "B")).to.eq("A");
+    expect(merge(map, 1, "A", (v) => v + "B")).to.eq("A");
   });
 });

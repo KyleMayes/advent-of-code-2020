@@ -149,7 +149,7 @@ export class Grid2d<T> {
     heuristic?: (point: Point2d) => number,
   ): Point2d[] | undefined {
     if (!heuristic) {
-      heuristic = p => getManhattanDistance(p, end);
+      heuristic = (p) => getManhattanDistance(p, end);
     }
 
     const open = new Grid2d<true>();

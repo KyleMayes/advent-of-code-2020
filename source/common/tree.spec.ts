@@ -134,7 +134,7 @@ describe("tree/Tree", () => {
     ]);
 
     const visited: string[] = [];
-    tree.root.traverse(n => visited.push(n.value), "breadth-first");
+    tree.root.traverse((n) => visited.push(n.value), "breadth-first");
     expect(visited).to.have.ordered.members(["A", "B", "D", "C", "E"]);
   });
 
@@ -147,7 +147,7 @@ describe("tree/Tree", () => {
     ]);
 
     const visited: string[] = [];
-    tree.root.traverse(n => visited.push(n.value), "depth-first");
+    tree.root.traverse((n) => visited.push(n.value), "depth-first");
     expect(visited).to.have.ordered.members(["A", "B", "C", "D", "E"]);
   });
 

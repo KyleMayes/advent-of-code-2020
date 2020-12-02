@@ -22,7 +22,7 @@ export class Multimap<K, V> {
   /** The number of entries in this map. */
   get size(): number {
     let total = 0;
-    this.map.forEach(vs => (total += vs.size));
+    this.map.forEach((vs) => (total += vs.size));
     return total;
   }
 
@@ -43,7 +43,7 @@ export class Multimap<K, V> {
 
   /** Returns whether this map contains an entry with the supplied value. */
   hasValue(value: V): boolean {
-    return Array.from(this.map.values()).some(vs => vs.has(value));
+    return Array.from(this.map.values()).some((vs) => vs.has(value));
   }
 
   /** Returns the keys in this map for the supplied key. */
@@ -90,7 +90,7 @@ export class Multimap<K, V> {
   /** Returns the values in this map. */
   values(): Set<V> {
     const values = new Set<V>();
-    this.map.forEach(vs => vs.forEach(v => values.add(v)));
+    this.map.forEach((vs) => vs.forEach((v) => values.add(v)));
     return values;
   }
 

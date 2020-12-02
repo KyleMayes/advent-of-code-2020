@@ -20,7 +20,7 @@ export function computeIfPresent<K, V>(map: Map<K, V>, key: K, compute: (value: 
 
 export function count<T>(values: T[]): Map<T, number> {
   const occurrences = new Map<T, number>();
-  values.forEach(v => merge(occurrences, v, 1, (a, b) => a + b));
+  values.forEach((v) => merge(occurrences, v, 1, (a, b) => a + b));
   return occurrences;
 }
 

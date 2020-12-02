@@ -40,7 +40,7 @@ function decode(value: number): [number, Mode[]] {
     const modes = string
       .substr(0, string.length - 2)
       .split("")
-      .map(c => (c === "2" ? "relative" : c === "1" ? "immediate" : "position"))
+      .map((c) => (c === "2" ? "relative" : c === "1" ? "immediate" : "position"))
       .reverse();
     return [opcode, modes];
   }
@@ -60,7 +60,7 @@ export function start(
     memory.write(address, value);
   }
 
-  return (function*() {
+  return (function* () {
     let ip = 0;
     let base = 0;
 

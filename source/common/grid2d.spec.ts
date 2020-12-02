@@ -96,16 +96,16 @@ describe("grid2d/Grid2d", () => {
 
   it("can be printed to a string", () => {
     const grid = new Grid2d<boolean>();
-    expect(grid.print(v => (v ? "T" : "F"))).to.eq(" \n");
+    expect(grid.print((v) => (v ? "T" : "F"))).to.eq(" \n");
 
     grid.write(0, 0, false);
-    expect(grid.print(v => (v ? "T" : "F"), { fill: "-" })).to.eq("F\n");
+    expect(grid.print((v) => (v ? "T" : "F"), { fill: "-" })).to.eq("F\n");
 
     grid.write(3, 2, true);
     grid.write(-3, 2, true);
     grid.write(3, -2, true);
     grid.write(-3, -2, true);
-    expect(grid.print(v => (v ? "T" : "F"), { fill: "-" })).to.eq(
+    expect(grid.print((v) => (v ? "T" : "F"), { fill: "-" })).to.eq(
       `
 T-----T
 -------
