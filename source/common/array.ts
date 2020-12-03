@@ -1,7 +1,23 @@
-export function iota(start: number, end: number): number[] {
+export function iota(start: number, end: number, step: number = 1): number[] {
   const numbers = [];
-  for (let i = start; i < end; ++i) numbers.push(i);
+  for (let i = start; i < end; i += step) numbers.push(i);
   return numbers;
+}
+
+export function iota2d(
+  start: [number, number],
+  end: [number, number],
+  step: [number, number] = [1, 1],
+): [number, number][] {
+  const cells: [number, number][] = [];
+
+  for (let y = start[1]; y < end[1]; y += step[1]) {
+    for (let x = start[0]; x < end[0]; x += step[0]) {
+      cells.push([x, y]);
+    }
+  }
+
+  return cells;
 }
 
 export function permute<T>(array: T[]): T[][] {

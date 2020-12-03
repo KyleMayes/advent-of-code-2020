@@ -1,22 +1,15 @@
 import * as _ from "lodash";
+import { iota2d } from "./common/array";
 
 import * as input from "./common/input";
 
 const { grid, width, height } = input.grid("day3.txt");
 
 function countTrees(dx: number, dy: number): number {
-  let trees = 0;
-
-  let x = dx;
-  for (let y = dy; y < height; y += dy) {
-    if (grid.read(x % width, y) === "#") {
-      trees += 1;
-    }
-
-    x += dx;
-  }
-
-  return trees;
+  // prettier-ignore
+  return iota2d([dx, dy], [width + 1, height + 1], [dx, dy])
+    .filter(([x, y]) => grid.read(x % width, y) === "#")
+    .length;
 }
 
 console.log(`Part 1: ${countTrees(3, 1)}`);
