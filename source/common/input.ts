@@ -10,6 +10,27 @@ export function read(input: string, trim: boolean = true): string {
   return trim ? contents.trim() : contents;
 }
 
+/** Reads the supplied input file and gets the chunks of lines separated by empty lines. */
+export function chunks(input: string): string[][] {
+  const chunks: string[][] = [];
+  let chunk: string[] = [];
+
+  for (const line of linesWithEmpties(input)) {
+    if (line.length !== 0) {
+      chunk.push(line);
+    } else {
+      chunks.push(chunk);
+      chunk = [];
+    }
+  }
+
+  if (chunk.length !== 0) {
+    chunks.push(chunk);
+  }
+
+  return chunks;
+}
+
 /** Reads the supplied input file and gets the non-empty comma-separated values. */
 export function csv(input: string): string[] {
   return read(input)
@@ -23,6 +44,13 @@ export function lines(input: string): string[] {
     .split("\n")
     .map((l) => l.trim())
     .filter((l) => l !== "");
+}
+
+/** Reads the supplied input file and gets the non-empty lines. */
+export function linesWithEmpties(input: string): string[] {
+  return read(input)
+    .split("\n")
+    .map((l) => l.trim());
 }
 
 /** Reads the supplied input file and gets the non-empty comma-separated values for each line. */
