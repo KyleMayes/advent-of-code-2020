@@ -12,10 +12,8 @@ for (const line of lines) {
     rules.set(
       type,
       requirements.split(", ").map((r) => {
-        const space = r.indexOf(" ");
-        const number = parseInt(r.substring(0, space), 10);
-        const type = r.substring(space + 1).replace(/ bag(s)?(\.)?/, "");
-        return [number, type];
+        const matches = /(\d+) (\w+ \w+) bag[s]?[\.]?/.exec(r)!!;
+        return [parseInt(matches[1], 10), matches[2]];
       }),
     );
   } else {
