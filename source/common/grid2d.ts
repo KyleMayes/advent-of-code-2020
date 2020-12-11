@@ -1,5 +1,27 @@
+import * as _ from "lodash";
+import { values } from "lodash";
+
 import { Point2d, getManhattanDistance } from "./geom2d";
 import { computeIfAbsent } from "./map";
+
+/** Gets the dx and dy values for directions on a grid. */
+export function getDirections(diagonal: boolean = false): [number, number][] {
+  const directions: [number, number][] = [
+    [1, 0],
+    [-1, 0],
+    [0, 1],
+    [0, -1],
+  ];
+
+  if (diagonal) {
+    directions.push([1, 1]);
+    directions.push([1, -1]);
+    directions.push([-1, 1]);
+    directions.push([-1, -1]);
+  }
+
+  return directions;
+}
 
 /** A 2D axis-aligned rectangle. */
 export class Rectangle2d {
@@ -39,6 +61,13 @@ export class Rectangle2d {
 /** An infinite 2D grid. */
 export class Grid2d<T> {
   private cells = new Map<number, Map<number, T>>();
+
+  /** Returns a deep clone of this grid. */
+  clone(): Grid2d<T> {
+    const grid = new Grid2d<T>();
+    grid.cells = _.cloneDeep(this.cells);
+    return grid;
+  }
 
   /** Reads a value previously written to this grid. */
   read(x: number, y: number): T | undefined {
@@ -126,19 +155,33 @@ export class Grid2d<T> {
       if (value) neighbors.push([[x, y], value]);
     };
 
-    check(x + 1, y);
-    check(x - 1, y);
-    check(x, y + 1);
-    check(x, y - 1);
-
-    if (diagonal) {
-      check(x + 1, y + 1);
-      check(x - 1, y + 1);
-      check(x + 1, y - 1);
-      check(x - 1, y - 1);
+    for (const [dx, dy] of getDirections(diagonal)) {
+      check(x + dx, y + dy);
     }
 
     return neighbors;
+  }
+
+  /** Finds a value by casting a ray from a point (not including the point). */
+  raycast(
+    x: number,
+    y: number,
+    dx: number,
+    dy: number,
+    predicate: (point: Point2d, value: T) => boolean,
+    stop: (point: Point2d, value: T | undefined) => boolean = (_p, v) => v === undefined,
+  ): [Point2d, T] | null {
+    for (let rx = x + dx, ry = y + dy; ; rx += dx, ry += dy) {
+      const value = this.read(rx, ry);
+
+      if (stop([rx, ry], value)) {
+        return null;
+      }
+
+      if (value !== undefined && predicate([rx, ry], value)) {
+        return [[rx, ry], value];
+      }
+    }
   }
 
   /** Returns the shortest path between two values previously written to this grid. */
