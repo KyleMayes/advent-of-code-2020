@@ -1,6 +1,16 @@
 /** A 2D point. */
 export type Point2d = [number, number];
 
+/** Converts a value from degrees to radians. */
+export function degToRad(degrees: number): number {
+  return degrees * (Math.PI / 180);
+}
+
+/** Converts a value from radians to degrees. */
+export function radToDeg(radians: number): number {
+  return radians * (180 / Math.PI);
+}
+
 /** Returns whether the two supplied points are equal. */
 export function eq2d(a: Point2d, b: Point2d): boolean {
   return a[0] === b[0] && a[1] === b[1];
@@ -53,4 +63,14 @@ export function getVector(
       : getDistance(a, b);
 
   return { a, b, angle, length };
+}
+
+/** Rotates a point around another point (angle in degrees). */
+export function rotate(center: Point2d, point: Point2d, angle: number): Point2d {
+  const radians = degToRad(angle);
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
+  const rx = cos * (point[0] - center[0]) + sin * (point[1] - center[1]) + center[0];
+  const ry = cos * (point[1] - center[1]) - sin * (point[0] - center[0]) + center[1];
+  return [rx, ry];
 }
