@@ -1,3 +1,9 @@
+import { mod } from "./math";
+
+export function indexMod<T>(items: T[], index: number): T {
+  return items[mod(index, items.length)];
+}
+
 export function iota(start: number, end: number, step: number = 1): number[] {
   const numbers = [];
   for (let i = start; i < end; i += step) numbers.push(i);

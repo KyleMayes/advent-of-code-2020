@@ -1,6 +1,21 @@
 import { expect } from "chai";
 
-import { iota, permute, streak } from "./array";
+import { indexMod, iota, permute, streak } from "./array";
+
+describe("array/indexMod", () => {
+  it("works", () => {
+    const array = [4, 17, 322];
+    expect(indexMod(array, -4)).to.equal(322);
+    expect(indexMod(array, -3)).to.equal(4);
+    expect(indexMod(array, -2)).to.equal(17);
+    expect(indexMod(array, -1)).to.equal(322);
+    expect(indexMod(array, 0)).to.equal(4);
+    expect(indexMod(array, 1)).to.equal(17);
+    expect(indexMod(array, 2)).to.equal(322);
+    expect(indexMod(array, 3)).to.equal(4);
+    expect(indexMod(array, 4)).to.equal(17);
+  });
+});
 
 describe("array/iota", () => {
   it("works", () => {
