@@ -21,3 +21,8 @@ export function lcm(a: number | number[], b?: number): number {
     return a.reduce((m, n) => lcm(m, n));
   }
 }
+
+/** A mod operation that behaves like it does in math (no negative numbers) */
+export function mod(i: number, n: number): number {
+  return ((i % n) + n) % n;
+}

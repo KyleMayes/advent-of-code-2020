@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-import { gcd, lcm } from "./math";
+import { gcd, lcm, mod } from "./math";
 
 describe("math/gcd", () => {
   it("works", () => {
@@ -22,5 +22,21 @@ describe("math/lcm", () => {
     expect(lcm(4, 322)).to.eq(644);
     expect(lcm([4, 322, 9000])).to.eq(1449000);
     expect(lcm([1, 6, 18, 28, 44])).to.eq(2772);
+  });
+});
+
+describe("math/mod", () => {
+  it("works", () => {
+    expect(mod(-5, 4)).to.eq(3);
+    expect(mod(-4, 4)).to.eq(0);
+    expect(mod(-3, 4)).to.eq(1);
+    expect(mod(-2, 4)).to.eq(2);
+    expect(mod(-1, 4)).to.eq(3);
+    expect(mod(0, 4)).to.eq(0);
+    expect(mod(1, 4)).to.eq(1);
+    expect(mod(2, 4)).to.eq(2);
+    expect(mod(3, 4)).to.eq(3);
+    expect(mod(4, 4)).to.eq(0);
+    expect(mod(5, 4)).to.eq(1);
   });
 });
