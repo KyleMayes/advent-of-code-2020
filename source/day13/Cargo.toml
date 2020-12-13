@@ -1,0 +1,13 @@
+[package]
+
+edition = "2018"
+
+name = "day13"
+authors = ["Kyle Mayes <kyle@mayeses.com>"]
+
+version = "1.0.0"
+
+[dependencies]
+
+num = "0.3"
+num-bigint = "0.3"
